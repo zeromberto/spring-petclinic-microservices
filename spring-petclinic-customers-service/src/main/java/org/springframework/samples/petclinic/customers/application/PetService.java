@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.customers.application;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.customers.domain.model.pet.Pet;
@@ -12,10 +14,12 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * @author mszarlinski on 2016-10-30.
+ * @author Maciej Szarlinski
  */
 @Service
 public class PetService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PetService.class);
 
     private final PetRepository petRepository;
 
@@ -31,6 +35,7 @@ public class PetService {
 
     @Transactional
     public void savePet(Pet pet) throws DataAccessException {
+        LOG.info("Saving pet {}", pet);
         petRepository.save(pet);
     }
 

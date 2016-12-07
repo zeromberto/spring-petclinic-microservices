@@ -1,12 +1,15 @@
 # Distributed version of the Spring PetClinic Sample Application built with Spring Cloud [![Build Status](https://travis-ci.org/spring-petclinic/spring-petclinic-microservices.svg?branch=master)](https://travis-ci.org/spring-petclinic/spring-petclinic-microservices/)
 
+This microservices branch was initially derived from [AngularJS version](https://github.com/spring-petclinic/spring-petclinic-angular1) to demonstrate how to split sample Spring application into [microservices](http://www.martinfowler.com/articles/microservices.html). To achieve that goal we used [Spring Cloud Netflix](https://github.com/spring-cloud/spring-cloud-netflix) technology stack.
+
 ## Starting services locally
-Every microservice is a Spring Boot application and can be started locally using IDE or `mvn spring-boot:run` command. Please note that supporting services (Config and Discovery Server) must be started before any other application (Customers, Vets, Visits and API).
+Every microservice is a Spring Boot application and can be started locally using IDE or `mvn spring-boot:run` command. Please note that supporting services (Config and Discovery Server) must be started before any other application (Customers, Vets, Visits and API). Tracing server startup is optional.
 If everything goes well, you can access the following services at given location:
 * Discovery Server - http://localhost:8761
 * Config Server - http://localhost:8888
 * AngularJS frontend (API Gateway) - http://localhost:8080
 * Customers, Vets and Visits Services - random port, check Eureka Dashboard 
+* Tracing Server (Zipkin) - http://localhost:9411
 
 ## Understanding the Spring Petclinic application with a few diagrams
 <a href="https://speakerdeck.com/michaelisvy/spring-petclinic-sample-application">See the presentation here</a>
@@ -54,7 +57,7 @@ File -> Import -> Maven -> Existing Maven project
 ```
 
 ## Client-side Architecture
-
+[TBD]
 Compared to the [standard Petclinic based on JSP pages](https://github.com/spring-projects/spring-petclinic), 
 this ~~SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module and a server module~~:
 * springboot-petclinic-client : static resources (images, fonts, style, angular JS code) packaged as a webjar.
@@ -65,30 +68,34 @@ this ~~SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module
 
 <table>
   <tr>
-    <th width="300px">Spring Boot Configuration</th><th width="300px"></th>
+    <th width="300px">Spring Cloud components</th><th width="300px"></th>
   </tr>
   <tr>
-    <td>The Main Class</td>
-    <td><a href="/springboot-petclinic-server/src/main/java/org/springframework/samples/petclinic/application/PetClinicApplication.java">PetClinicApplication.java</a></td>
+    <td>Configuration server</td>
+    <td><a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-config-server/src/main/resources/application.yml">Config server properties</a>, 
+        <a href="https://github.com/spring-petclinic/spring-petclinic-microservices-config">Configuration repository</a></td>
   </tr>
   <tr>
-    <td>Properties Files</td>
+    <td>Service discovery</td>
     <td>
-      <a href="/springboot-petclinic-server/src/main/resources/application.properties">application.properties</a>
-      <a href="/springboot-petclinic-server/src/main/resources/application-dev.properties">application-dev.properties</a>
-      <a href="/springboot-petclinic-server/src/main/resources/application-prod.properties">application-prod.properties</a>
+      <a href="https://github.com/spring-petclinic/spring-petclinic-microservices/tree/master/spring-petclinic-discovery-server">Eureka server</a>, 
+      <a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-vets-service/src/main/java/org/springframework/samples/petclinic/vets/VetsServiceApplication.java">Service discovery client</a>
     </td>
   </tr>
   <tr>
-    <td>Caching</td>
-    <td>Use JCache with EhCache <a href="/springboot-petclinic-server/src/main/java/org/springframework/samples/petclinic/config/CacheConfig.java">CacheConfig.java</a> <a href="/src/main/resources/ehcache.xml">ehcache.xml</a></td>
+    <td>API gateway</td>
+    <td><a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-api-gateway/src/main/java/org/springframework/samples/petclinic/api/ApiGatewayApplication.java">Zuul reverse proxy</a>,
+    <a href="https://github.com/spring-petclinic/spring-petclinic-microservices-config/blob/master/api-gateway.yml">Routing configuration</a></td>
   </tr>
-    <tr>
-      <td>Homepage</td>
-      <td>Map root context to the index.html template <a href="/springboot-petclinic-server/src/main/java/org/springframework/samples/petclinic/config/WebConfig.java">WebConfig.java</a> <a href="/src/main/resources/ehcache.xml">ehcache.xml</a></td>
-    </tr>
+  <tr>
+      <td>Circuit breaker</td>
+      <td>TBD</td>
+  </tr>
+  <tr>
+      <td>Graphite monitoring</td>
+      <td>TBD</td>
+  </tr>
 </table>
-
 
 <table>
   <tr>
@@ -97,25 +104,26 @@ this ~~SpringBoot AngularJS Petclinic is splitted in 2 modules - a client module
   <tr>
       <td>Node and NPM</td>
       <td>
-        <a href="/springboot-petclinic-client/pom.xml">The frontend-maven-plugin plugin downloads/installs Node and NPM locally then runs Bower and Gulp</a> 
+        <a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-client/pom.xml">The frontend-maven-plugin plugin downloads/installs Node and NPM locally then runs Bower and Gulp</a> 
       </td>
   </tr>
   <tr>
       <td>Bower</td>
       <td>
-        <a href="/springboot-petclinic-client/bower.json">JavaScript libraries are defined by the manifest file bower.json</a>
+        <a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-client/bower.json">JavaScript libraries are defined by the manifest file bower.json</a>
       </td>
   </tr>
   <tr>
       <td>Gulp</td>
       <td>
-        <a href="/springboot-petclinic-client/gulpfile.js">Tasks automated by Gulp: minify CSS and JS, generate CSS from LESS, copy other static resources</a> 
+        <a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-client/gulpfile.js">Tasks automated by Gulp: minify CSS and JS, generate CSS from LESS, copy other static resources</a> 
       </td>
   </tr>
     <tr>
         <td>AngularJS</td>
         <td>
-          <a href="/springboot-petclinic-client/scripts/">app.js, controllers and templates</a> 
+          <a href="https://github.com/spring-petclinic/spring-petclinic-microservices/blob/master/spring-petclinic-client/src/scripts/app.js">Application module</a>, 
+           <a href="https://github.com/toddmotto/angular-1-5-components-app">Angular 1.5 component architecture</a>
         </td>
     </tr>
 </table>
