@@ -79,6 +79,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+	    <dependency>
+		  <groupId>net.kieker-monitoring</groupId>
+		  <artifactId>kieker</artifactId>
+		  <version>1.12</version>
+		  <classifier>aspectj</classifier>
+		  <scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

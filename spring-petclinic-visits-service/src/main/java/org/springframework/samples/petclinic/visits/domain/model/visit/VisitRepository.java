@@ -16,10 +16,12 @@
 package org.springframework.samples.petclinic.visits.domain.model.visit;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.visits.support.jpa.BaseEntity;
 
 import java.util.List;
+import java.util.Date;
+import org.springframework.samples.petclinic.visits.domain.model.visit.Visit;
 
 /**
  * Repository class for <code>Visit</code> domain objects All method names are compliant with Spring Data naming
@@ -30,16 +32,19 @@ import java.util.List;
  * @author Sam Brannen
  * @author Michael Isvy
  */
-public interface VisitRepository extends Repository<Visit, Integer> {
+public interface VisitRepository extends CrudRepository<Visit, Integer> {
 
     /**
      * Save a <code>Visit</code> to the data store, either inserting or updating it.
      *
      * @param visit the <code>Visit</code> to save
+     * @return 
      * @see BaseEntity#isNew
      */
-    void save(Visit visit) throws DataAccessException;
+    Visit save(Visit visit) throws DataAccessException;
 
     List<Visit> findByPetId(int petId);
+    
+    Visit findOneByDateAndPetId(Date date, int petId);
 
 }

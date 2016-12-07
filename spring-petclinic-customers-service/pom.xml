@@ -44,7 +44,7 @@
             <groupId>org.springframework.samples.petclinic.monitoring</groupId>
             <artifactId>spring-petclinic-monitoring</artifactId>
         </dependency>
-
+		
         <dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -75,6 +75,14 @@
             <artifactId>assertj-core</artifactId>
             <scope>test</scope>
         </dependency>
+        
+        <dependency>
+		  <groupId>net.kieker-monitoring</groupId>
+		  <artifactId>kieker</artifactId>
+		  <version>1.12</version>
+		  <classifier>aspectj</classifier>
+		  <scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

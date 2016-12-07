@@ -24,7 +24,13 @@ public class VisitService {
 
     @Transactional
     public void saveVisit(Visit visit) throws DataAccessException {
-        visitRepository.save(visit);
+    	Visit savedVisit = visitRepository.findOneByDateAndPetId(visit.getDate(), visit.getPetId());
+    	if(savedVisit != null) {
+    		savedVisit.setDescription(visit.getDescription());
+    	} else {
+    		savedVisit = visit;
+    	}
+    	visitRepository.save(savedVisit);
     }
 
     @Transactional(readOnly = true)

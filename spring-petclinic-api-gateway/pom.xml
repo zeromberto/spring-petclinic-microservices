@@ -33,6 +33,14 @@
             <artifactId>spring-petclinic-ui</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+		  <groupId>net.kieker-monitoring</groupId>
+		  <artifactId>kieker</artifactId>
+		  <version>1.12</version>
+		  <classifier>aspectj</classifier>
+		  <scope>provided</scope>
+		</dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
