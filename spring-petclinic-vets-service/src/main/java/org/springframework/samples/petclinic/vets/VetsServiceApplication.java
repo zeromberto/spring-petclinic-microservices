@@ -17,7 +17,7 @@ import kieker.monitoring.probe.spring.flow.RestInInterceptor;
 @SpringBootApplication
 @Configuration
 @EnableConfigurationProperties(VetsProperties.class)
-@ImportResource("classpath:/META-INF/aop.xml")
+//@ImportResource("classpath:/META-INF/aop.xml")
 public class VetsServiceApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class VetsServiceApplication extends WebMvcConfigurerAdapter {
 	
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-    	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor());
-    	registry.addInterceptor(new RestInInterceptor());
+//    	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor());
+//    	registry.addInterceptor(new RestInInterceptor());
     }
 }

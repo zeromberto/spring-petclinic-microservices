@@ -11,7 +11,7 @@
 	<groupId>org.springframework.samples</groupId>
 	<artifactId>spring-petclinic-microservices</artifactId>
 	<version>1.4.2</version>
-    <name>${project.artifactId}</name>
+	<name>Spring Petclinic :: Parent POM</name>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -23,7 +23,6 @@
         <module>spring-petclinic-discovery-server</module>
         <module>spring-petclinic-api-gateway</module>
         <module>spring-petclinic-monitoring</module>
-        <module>spring-petclinic-tracing-server</module>
     </modules>
 
     <properties>
