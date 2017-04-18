@@ -1,0 +1,1 @@
+"use strict";angular.module("visits",["ui.router"]).config(["$stateProvider",function(t){t.state("visits",{parent:"app",url:"/owners/:ownerId/pets/:petId/visits",template:"<visits></visits>"})}]);

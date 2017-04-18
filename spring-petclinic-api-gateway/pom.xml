@@ -83,6 +83,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>3.0</version>
+		</dependency>        
     </dependencies>
 
     <build>
@@ -124,6 +129,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
                     <verbose>true</verbose>
                     <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>

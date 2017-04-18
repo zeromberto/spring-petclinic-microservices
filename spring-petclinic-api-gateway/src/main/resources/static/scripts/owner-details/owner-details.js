@@ -1,0 +1,1 @@
+"use strict";angular.module("ownerDetails",["ui.router"]).config(["$stateProvider",function(e){e.state("ownerDetails",{parent:"app",url:"/owners/details/:ownerId",template:"<owner-details></owner-details>"})}]);

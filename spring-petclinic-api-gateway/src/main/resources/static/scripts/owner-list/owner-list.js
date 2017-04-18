@@ -1,0 +1,1 @@
+"use strict";angular.module("ownerList",["ui.router"]).config(["$stateProvider",function(e){e.state("owners",{parent:"app",url:"/owners",template:"<owner-list></owner-list>"})}]);

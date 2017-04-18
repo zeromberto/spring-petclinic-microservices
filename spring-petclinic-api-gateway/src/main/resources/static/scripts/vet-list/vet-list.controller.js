@@ -1,0 +1,1 @@
+"use strict";angular.module("vetList").controller("VetListController",["$http",function(t){var e=this;t.get("api/vet/vets").then(function(t){e.vetList=t.data})}]);

@@ -17,7 +17,7 @@ import kieker.monitoring.probe.spring.flow.RestInInterceptor;
 @SpringBootApplication
 @Configuration
 @ImportResource("classpath:/META-INF/aop.xml")
-//@Import(MonitoringConfig.class)
+@Import(MonitoringConfig.class)
 public class CustomersServiceApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
