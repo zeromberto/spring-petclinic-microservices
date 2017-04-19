@@ -43,6 +43,7 @@ public class ZuulPostInterceptor extends ZuulFilter {
 		int eoi = data.getEoi();
 		int ess = data.getEss();
 		CTRLINST.newMonitoringRecord(new OperationExecutionRecord(data.getSignature(), sessionId, traceId, tin, tout, hostname, eoi, ess));
+		CF_REGISTRY.unsetThreadLocalTraceId();
 		SESSION_REGISTRY.unsetThreadLocalSessionId();
 		return null;
 	}

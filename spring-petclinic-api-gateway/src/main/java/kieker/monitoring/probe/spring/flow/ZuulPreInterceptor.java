@@ -44,12 +44,13 @@ public class ZuulPreInterceptor extends ZuulFilter {
 		final String hostname = VMNAME;
 		HttpServletRequest request = ctx.getRequest();
 		// TODO handle thread IDs
-		final String sessionId = request.getSession().getId();
-		SESSION_REGISTRY.storeThreadLocalSessionId(sessionId);
+		long traceId = -1L; // -1L if entry point
+		ThreadSpecificInterceptedData tData = (ThreadSpecificInterceptedData) ctx.get("KiekerInfo");
+		if(tData != null) {
+			traceId = tData.getTraceId();
+		}
 		final int eoi; // this is executionOrderIndex-th execution in this trace
 		final int ess; // this is the height in the dynamic call tree of this execution
-		final int nextESS;
-		long traceId = CF_REGISTRY.recallThreadLocalTraceId(); // traceId, -1 if entry point
 		if (traceId == -1) {
 			entrypoint = true;
 			traceId = CF_REGISTRY.getAndStoreUniqueThreadLocalTraceId();
@@ -57,19 +58,17 @@ public class ZuulPreInterceptor extends ZuulFilter {
 			CF_REGISTRY.storeThreadLocalESS(1); // next operation is ess + 1
 			eoi = 0;
 			ess = 0;
-			nextESS = 1;
 		} else {
 			entrypoint = false;
-			eoi = CF_REGISTRY.incrementAndRecallThreadLocalEOI();
-			ess = CF_REGISTRY.recallAndIncrementThreadLocalESS();
-			nextESS = ess + 1;
+			eoi = tData.getEoi() + 1;
+			ess = tData.getEss();
 			if ((eoi == -1) || (ess == -1)) {
 				LOG.error("eoi and/or ess have invalid values:" + " eoi == " + eoi + " ess == " + ess);
 				CTRLINST.terminateMonitoring();
 			}
 		}
 		
-		ctx.addZuulRequestHeader("KiekerTracingInfo", Long.toString(traceId) + "," + sessionId + "," + Integer.toString(eoi) + "," + Integer.toString(nextESS));
+		ctx.addZuulRequestHeader("KiekerTracingInfo", Long.toString(traceId) + "," + traceId + "," + Integer.toString(eoi) + "," + Integer.toString(ess));
 		
 		// measure before
 		final long tin = TIME.getTime();
@@ -83,7 +82,7 @@ public class ZuulPreInterceptor extends ZuulFilter {
 		}
 		signature = signature + request.getMethod();
 		
-		ThreadSpecificInterceptedData data = new ThreadSpecificInterceptedData(signature, sessionId, traceId, tin, hostname, eoi, ess);
+		ThreadSpecificInterceptedData data = new ThreadSpecificInterceptedData(signature, request.getSession().getId(), traceId, tin, hostname, eoi, ess);
 		ctx.set("KiekerInfo", data);
 		
 		return null;
