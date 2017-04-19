@@ -54,8 +54,6 @@ public class ZuulPreInterceptor extends ZuulFilter {
 		if (traceId == -1) {
 			entrypoint = true;
 			traceId = CF_REGISTRY.getAndStoreUniqueThreadLocalTraceId();
-			CF_REGISTRY.storeThreadLocalEOI(0);
-			CF_REGISTRY.storeThreadLocalESS(1); // next operation is ess + 1
 			eoi = 0;
 			ess = 0;
 		} else {
@@ -68,7 +66,19 @@ public class ZuulPreInterceptor extends ZuulFilter {
 			}
 		}
 		
-		ctx.addZuulRequestHeader("KiekerTracingInfo", Long.toString(traceId) + "," + traceId + "," + Integer.toString(eoi) + "," + Integer.toString(ess));
+		CF_REGISTRY.storeThreadLocalEOI(eoi);
+		CF_REGISTRY.storeThreadLocalESS(ess + 1); // next operation is ess + 1
+		
+		String comma = ",";
+		StringBuilder builder = new StringBuilder();
+		builder.append(traceId);
+		builder.append(comma);
+		builder.append(ctx.getRequest().getSession().getId());
+		builder.append(comma);
+		builder.append(Integer.toString(eoi));
+		builder.append(comma);
+		builder.append(Integer.toString(ess+1));
+		ctx.addZuulRequestHeader("KiekerTracingInfo", builder.toString());
 		
 		// measure before
 		final long tin = TIME.getTime();
