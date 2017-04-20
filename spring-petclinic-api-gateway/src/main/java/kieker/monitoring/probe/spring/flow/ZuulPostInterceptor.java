@@ -55,7 +55,7 @@ public class ZuulPostInterceptor extends ZuulFilter {
 
 	@Override
 	public int filterOrder() {
-		return 1;
+		return Integer.MAX_VALUE;
 	}
 
 }
