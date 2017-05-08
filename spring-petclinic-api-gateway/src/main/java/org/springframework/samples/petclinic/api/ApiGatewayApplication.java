@@ -1,11 +1,13 @@
 package org.springframework.samples.petclinic.api;
 
-import java.util.Collections;
-
+import kieker.monitoring.probe.spring.executions.OperationExecutionWebRequestRegistrationInterceptor;
+import kieker.monitoring.probe.spring.flow.RestInInterceptor;
+import kieker.monitoring.probe.spring.flow.RestOutInterceptor;
+import kieker.monitoring.probe.spring.flow.ZuulPostInterceptor;
+import kieker.monitoring.probe.spring.flow.ZuulPreInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +25,7 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-import kieker.monitoring.probe.spring.executions.OperationExecutionWebRequestRegistrationInterceptor;
-import kieker.monitoring.probe.spring.flow.RestInInterceptor;
-import kieker.monitoring.probe.spring.flow.RestOutInterceptor;
-import kieker.monitoring.probe.spring.flow.ZuulPostInterceptor;
-import kieker.monitoring.probe.spring.flow.ZuulPreInterceptor;
+import java.util.Collections;
 
 @EnableZuulProxy
 @EnableDiscoveryClient
@@ -48,8 +46,7 @@ public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    @LoadBalanced
-    RestTemplate loadBalancedRestTemplate() {
+    RestTemplate restTemplate() {
     	RestTemplate result = new RestTemplate();
     	result.setInterceptors(Collections.singletonList(new RestOutInterceptor()));
         return result;
@@ -73,7 +70,7 @@ public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/").setCachePeriod(60);;
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/").setCachePeriod(60);
 		registry.setOrder(1);
 	}
 	
