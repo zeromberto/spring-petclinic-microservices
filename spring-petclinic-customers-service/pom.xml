@@ -16,12 +16,6 @@
 	</parent>
 
 	<dependencies>
-        <!-- Petclinic -->
-        <dependency>
-            <groupId>org.springframework.samples.petclinic.monitoring</groupId>
-            <artifactId>spring-petclinic-monitoring</artifactId>
-        </dependency>
-
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -86,7 +80,12 @@
 		  <classifier>aspectj</classifier>
 		  <scope>provided</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.springframework.samples</groupId>
+            <artifactId>spring-petclinic-kieker-monitoring</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

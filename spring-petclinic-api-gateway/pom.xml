@@ -7,6 +7,7 @@
     <artifactId>spring-petclinic-api-gateway</artifactId>
     <version>1.4.2</version>
     <packaging>jar</packaging>
+    <name>spring-petclinic-api-gateway</name>
     <description>Spring PetClinic API Gateway</description>
 
     <parent>
@@ -23,7 +24,7 @@
             <artifactId>spring-petclinic-ui</artifactId>
             <version>${project.version}</version>
         </dependency>
-        
+
         <dependency>
 		  <groupId>net.kieker-monitoring</groupId>
 		  <artifactId>kieker</artifactId>
@@ -87,7 +88,12 @@
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.0</version>
-		</dependency>        
+		</dependency>
+        <dependency>
+        	<groupId>org.springframework.samples</groupId>
+        	<artifactId>spring-petclinic-kieker-monitoring</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -137,31 +143,43 @@
                     </generateGitPropertiesFilename>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.13</version>
-                <configuration>
-                    <imageName>${docker.image.prefix}/springboot-petclinic</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                    <forceTags>true</forceTags>
-                    <imageTags>
-                        <imageTag>${project.version}</imageTag>
-                        <imageTag>latest</imageTag>
-                    </imageTags>
-                    <useConfigFile>true</useConfigFile>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
-
+    <profiles>
+        <profile>
+            <id>buildDocker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>${docker.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                            <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                            <resources>
+                                <resource>
+                                    <targetPath>/</targetPath>
+                                    <directory>${project.build.directory}</directory>
+                                    <include>${project.build.finalName}.jar</include>
+                                </resource>
+                            </resources>
+                            <buildArgs>
+                                <ARTIFACT_NAME>${project.build.finalName}</ARTIFACT_NAME>
+                            </buildArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
