@@ -13,4 +13,4 @@ target/
 # Branch switching
 generated/
 
-spring-petclinic-microservices-config/
+spring-petclinic-microservices-config
