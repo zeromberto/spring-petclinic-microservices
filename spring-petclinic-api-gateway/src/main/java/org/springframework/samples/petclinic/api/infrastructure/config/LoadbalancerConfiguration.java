@@ -13,14 +13,14 @@ public class LoadbalancerConfiguration {
     @Autowired
     IClientConfig ribbonClientConfig;
 
-    @Bean
-    public IPing ribbonPing(IClientConfig config) {
-        return new PingUrl(false,"/owners");
-    }
+//    @Bean
+//    public IPing ribbonPing(IClientConfig config) {
+//        return new PingUrl(false,"/owners");
+//    }
 
     @Bean
     public IRule ribbonRule(IClientConfig config) {
-        //return new RoundRobinRule();
-        return new WeightedResponseTimeRule();
+        return new RoundRobinRule();
+//        return new WeightedResponseTimeRule();
     }
 }

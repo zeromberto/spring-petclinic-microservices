@@ -22,8 +22,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.mvc.ParameterizableViewController;
 import org.springframework.web.servlet.mvc.WebContentInterceptor;
 
 import kieker.common.logging.Log;
@@ -55,9 +53,11 @@ public class RestInInterceptor extends WebContentInterceptor {
 	private static final SessionRegistry SESSION_REGISTRY = SessionRegistry.INSTANCE;
 
 	private final ThreadLocal<ThreadSpecificInterceptedData> threadSpecificInterceptedData = new ThreadLocal<ThreadSpecificInterceptedData>();
+	private final String kiekerQualifier;
 
-	public RestInInterceptor() {
-		// empty constructor
+	public RestInInterceptor(String kiekerQualifier) {
+		this.kiekerQualifier = kiekerQualifier;
+
 	}
 
 	@Override
@@ -152,7 +152,8 @@ public class RestInInterceptor extends WebContentInterceptor {
 		final long tout = TIME.getTime();
 
 		final ThreadSpecificInterceptedData tsid = this.threadSpecificInterceptedData.get();
-		String operationName = "HTTP" + request.getRequestURI().replace("/", ".").replaceAll("[0-9]*", "") + tsid.getSignature();
+		String operationName = "HTTP" + this.kiekerQualifier + "."
+				+ tsid.getSignature().replace("\n", "").replaceAll("( throws.*)", "");
 		CTRLINST.newMonitoringRecord(new OperationExecutionRecord(operationName, tsid.getSessionId(), tsid.getTraceId(), tsid.getTin(), tout,
 				tsid.getHostname(), tsid.getEoi(), tsid.getEss()));
 		// cleanup

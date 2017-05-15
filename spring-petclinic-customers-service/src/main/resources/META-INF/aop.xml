@@ -15,7 +15,9 @@
 	<!-- Kieker's instrumentation probes based on the Spring AOP interception framework -->
 	<bean id="opEMII" class="kieker.monitoring.probe.spring.executions.OperationExecutionMethodInvocationInterceptor" /> 
     <aop:config>
-        <aop:advisor advice-ref="opEMII" pointcut="execution(public * org.springframework.samples..*.*(..))"/>
+        <aop:advisor advice-ref="opEMII" pointcut="execution(public * org.springframework.samples.petclinic.customers.application.*.*(..))"/>
+        <aop:advisor advice-ref="opEMII" pointcut="execution(public * org.springframework.samples.petclinic.customers.domain..*.*(..))"/>
+        <aop:advisor advice-ref="opEMII" pointcut="execution(public * org.springframework.samples.petclinic.customers.boundary.web..*.*(..))"/>
         <!-- <aop:advisor advice-ref="opEMII" pointcut="execution(public * org.thymeleaf.spring4.view..*.*(..))"/> -->
     </aop:config>
 	

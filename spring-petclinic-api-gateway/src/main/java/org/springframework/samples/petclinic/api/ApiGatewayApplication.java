@@ -48,15 +48,15 @@ public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
     @Bean
     RestTemplate restTemplate() {
     	RestTemplate result = new RestTemplate();
-    	result.setInterceptors(Collections.singletonList(new RestOutInterceptor()));
+//    	result.setInterceptors(Collections.singletonList(new RestOutInterceptor()));
         return result;
     }
     
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-    	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor()).addPathPatterns("/**");
-    	registry.addInterceptor(new RestInInterceptor()).addPathPatterns("/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//    	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor()).addPathPatterns("/api/**");
+//    	registry.addInterceptor(new RestInInterceptor()).addPathPatterns("api/**");
+//    }
 	
 	@Bean
 	public ZuulPreInterceptor zuulPreInterceptor() {

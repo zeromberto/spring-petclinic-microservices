@@ -33,6 +33,15 @@
             <artifactId>spring-cloud-starter-eureka-server</artifactId>
         </dependency>
 
+        <!--Third Party-->
+        <dependency>
+            <groupId>net.kieker-monitoring</groupId>
+            <artifactId>kieker</artifactId>
+            <version>1.12</version>
+            <classifier>aspectj</classifier>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

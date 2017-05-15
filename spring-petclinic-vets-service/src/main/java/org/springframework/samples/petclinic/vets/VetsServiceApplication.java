@@ -27,6 +27,6 @@ public class VetsServiceApplication extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
     	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor());
-    	registry.addInterceptor(new RestInInterceptor());
+    	registry.addInterceptor(new RestInInterceptor("_VetsService"));
     }
 }

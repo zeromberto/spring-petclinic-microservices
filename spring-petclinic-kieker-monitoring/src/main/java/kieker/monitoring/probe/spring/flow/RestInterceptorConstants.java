@@ -24,7 +24,7 @@ package kieker.monitoring.probe.spring.flow;
  * @since 1.13
  */
 public class RestInterceptorConstants {
-	// Name of the header fielt that is added in the HTTP requests
+	// Name of the header field that is added in the HTTP requests
 	public static final String HEADER_FIELD = "KiekerTracingInfo";
 
 	private RestInterceptorConstants() {

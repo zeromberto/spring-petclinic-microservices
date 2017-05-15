@@ -32,8 +32,8 @@ services:
     entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     #ports:
     # - 8081:8081
-    deploy:
-      replicas: 3
+    #deploy:
+      #replicas: 3
       #resources:
       #  limits:
       #    cpus: '0.1'
