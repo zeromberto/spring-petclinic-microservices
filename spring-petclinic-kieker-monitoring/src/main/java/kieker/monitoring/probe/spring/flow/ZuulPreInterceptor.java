@@ -82,13 +82,26 @@ public class ZuulPreInterceptor extends ZuulFilter {
 		
 		// measure before
 		final long tin = TIME.getTime();
+
+		String signature = "";
+		String requestURI = request.getRequestURI().substring(1, request.getRequestURI().length());
+		signature = signature + requestURI.substring(0, StringUtils.indexOf(requestURI, '/'));
+		signature = signature + ".";
+
+
 		
-		String signature = request.getRequestURI().substring(1).replace("/", ".");
-		if(Character.isDigit(signature.charAt(signature.length()-1))) {
-			signature = signature.substring(0, StringUtils.indexOfAny(signature, "0123456789")-1);
-			signature = signature + "." + "numbered";
+//		String signature = request.getRequestURI().substring(1).replace("/", ".");
+		if(Character.isDigit(requestURI.charAt(requestURI.length()-1))) {
+
+			signature = signature + requestURI.substring(
+					StringUtils.lastIndexOf(requestURI.substring(0, requestURI.length() - 2),'/') + 1,
+					StringUtils.lastIndexOf(requestURI.substring(0, requestURI.length() - 1),'/'));
+			signature = signature + "Numbered";
 		} else {
-			signature = signature + ".";
+			signature = signature + requestURI.substring(
+					StringUtils.lastIndexOf(requestURI,'/') + 1,
+					requestURI.length());
+
 		}
 		signature = signature + request.getMethod();
 		
