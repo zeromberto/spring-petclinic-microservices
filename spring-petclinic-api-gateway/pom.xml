@@ -30,7 +30,7 @@
             <artifactId>kieker</artifactId>
             <version>1.12</version>
             <classifier>aspectj</classifier>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Spring Boot -->
