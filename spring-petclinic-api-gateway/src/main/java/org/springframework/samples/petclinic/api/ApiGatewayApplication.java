@@ -1,8 +1,5 @@
 package org.springframework.samples.petclinic.api;
 
-import kieker.monitoring.probe.spring.executions.OperationExecutionWebRequestRegistrationInterceptor;
-import kieker.monitoring.probe.spring.flow.RestInInterceptor;
-import kieker.monitoring.probe.spring.flow.RestOutInterceptor;
 import kieker.monitoring.probe.spring.flow.ZuulPostInterceptor;
 import kieker.monitoring.probe.spring.flow.ZuulPreInterceptor;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +13,6 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.cache.StandardCacheManager;
@@ -25,7 +21,6 @@ import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-import java.util.Collections;
 
 @EnableZuulProxy
 @EnableDiscoveryClient
@@ -34,7 +29,7 @@ import java.util.Collections;
 @SpringBootApplication
 @ImportResource("classpath:/META-INF/aop.xml")
 public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
-	
+
 	private ApplicationContext applicationContext;
 
 	public void setApplicationContext(ApplicationContext applicationContext) {
@@ -42,21 +37,13 @@ public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
 	}
 
     public static void main(String[] args) {
-        SpringApplication.run(ApiGatewayApplication.class, args);
+		SpringApplication.run(ApiGatewayApplication.class, args);
     }
 
     @Bean
     RestTemplate restTemplate() {
-    	RestTemplate result = new RestTemplate();
-//    	result.setInterceptors(Collections.singletonList(new RestOutInterceptor()));
-        return result;
+    	return new RestTemplate();
     }
-    
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//    	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor()).addPathPatterns("/api/**");
-//    	registry.addInterceptor(new RestInInterceptor()).addPathPatterns("api/**");
-//    }
 	
 	@Bean
 	public ZuulPreInterceptor zuulPreInterceptor() {
