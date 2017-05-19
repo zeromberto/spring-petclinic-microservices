@@ -14,3 +14,4 @@ target/
 generated/
 
 spring-petclinic-microservices-config
+mysql-scripts
