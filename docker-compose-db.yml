@@ -3,7 +3,7 @@ services:
   mysql:
     environment:
       MYSQL_ROOT_PASSWORD: petclinic
-    image: mysql/mysql-server:5.7.14
+    image: mysql
     ports:
      - "3306:3306"
      - "33060:33060"
