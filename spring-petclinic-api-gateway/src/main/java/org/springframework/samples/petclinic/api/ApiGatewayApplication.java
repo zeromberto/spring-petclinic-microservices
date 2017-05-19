@@ -39,11 +39,6 @@ public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
     public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayApplication.class, args);
     }
-
-    @Bean
-    RestTemplate restTemplate() {
-    	return new RestTemplate();
-    }
 	
 	@Bean
 	public ZuulPreInterceptor zuulPreInterceptor() {
