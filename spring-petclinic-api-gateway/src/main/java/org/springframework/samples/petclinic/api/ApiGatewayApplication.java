@@ -1,7 +1,5 @@
 package org.springframework.samples.petclinic.api;
 
-import kieker.monitoring.probe.spring.flow.ZuulPostInterceptor;
-import kieker.monitoring.probe.spring.flow.ZuulPreInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -10,7 +8,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -24,10 +21,8 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @EnableZuulProxy
 @EnableDiscoveryClient
-@Configuration
 @EnableWebMvc
 @SpringBootApplication
-@ImportResource("classpath:/META-INF/aop.xml")
 public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
 
 	private ApplicationContext applicationContext;
@@ -39,16 +34,6 @@ public class ApiGatewayApplication extends WebMvcConfigurerAdapter {
     public static void main(String[] args) {
 		SpringApplication.run(ApiGatewayApplication.class, args);
     }
-	
-	@Bean
-	public ZuulPreInterceptor zuulPreInterceptor() {
-		return new ZuulPreInterceptor();
-	}
-	
-	@Bean
-	public ZuulPostInterceptor zuulPostInterceptor() {
-		return new ZuulPostInterceptor();
-	}
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

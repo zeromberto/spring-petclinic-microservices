@@ -7,7 +7,6 @@ import org.springframework.context.annotation.ImportResource;
 
 @EnableEurekaServer
 @SpringBootApplication
-@ImportResource("classpath:/META-INF/aop.xml")
 public class DiscoveryServerApplication {
 
 	public static void main(String[] args) {

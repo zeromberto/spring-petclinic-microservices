@@ -78,18 +78,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.0</version>
         </dependency>
-        <dependency>
-            <groupId>net.kieker-monitoring</groupId>
-            <artifactId>kieker</artifactId>
-            <version>1.12</version>
-            <classifier>aspectj</classifier>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.samples</groupId>
-            <artifactId>spring-petclinic-kieker-monitoring</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>
