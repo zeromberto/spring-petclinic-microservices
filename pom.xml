@@ -31,38 +31,8 @@
 		<java.version>1.8</java.version>
 		<docker.plugin.version>0.4.13</docker.plugin.version>
 		<docker.image.prefix>zeromberto</docker.image.prefix>
+		<docker.image.tag>calibration</docker.image.tag>
 	</properties>
-
-	<profiles>
-		<profile>
-			<id>EvalVar1</id>
-			<properties>
-				<docker.image.tag>eval</docker.image.tag>
-				<PROFILE_ID>EvalVar1</PROFILE_ID>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar2</id>
-			<properties>
-				<docker.image.tag>eval</docker.image.tag>
-				<PROFILE_ID>EvalVar2</PROFILE_ID>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar3</id>
-			<properties>
-				<docker.image.tag>eval</docker.image.tag>
-				<PROFILE_ID>EvalVar3</PROFILE_ID>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar4</id>
-			<properties>
-				<docker.image.tag>eval</docker.image.tag>
-				<PROFILE_ID>EvalVar4</PROFILE_ID>
-			</properties>
-		</profile>
-	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
