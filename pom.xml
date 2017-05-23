@@ -37,37 +37,8 @@
 		<profile>
 			<id>calibration</id>
 			<properties>
-				<tag>calibration</tag>
-			</properties>
-		</profile>
-		<profile>
-			<id>eval</id>
-			<properties>
-				<tag>eval</tag>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar1</id>
-			<properties>
-				<tag>EvalVar1</tag>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar2</id>
-			<properties>
-				<tag>EvalVar2</tag>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar3</id>
-			<properties>
-				<tag>EvalVar3</tag>
-			</properties>
-		</profile>
-		<profile>
-			<id>EvalVar4</id>
-			<properties>
-				<tag>EvalVar4</tag>
+				<docker.image.tag>calibration</docker.image.tag>
+				<PROFILE_ID>calibration</PROFILE_ID>
 			</properties>
 		</profile>
 	</profiles>
