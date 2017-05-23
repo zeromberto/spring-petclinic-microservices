@@ -35,10 +35,31 @@
 
 	<profiles>
 		<profile>
-			<id>calibration</id>
+			<id>EvalVar1</id>
 			<properties>
-				<docker.image.tag>calibration</docker.image.tag>
-				<PROFILE_ID>calibration</PROFILE_ID>
+				<docker.image.tag>eval</docker.image.tag>
+				<PROFILE_ID>EvalVar1</PROFILE_ID>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar2</id>
+			<properties>
+				<docker.image.tag>eval</docker.image.tag>
+				<PROFILE_ID>EvalVar2</PROFILE_ID>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar3</id>
+			<properties>
+				<docker.image.tag>eval</docker.image.tag>
+				<PROFILE_ID>EvalVar3</PROFILE_ID>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar4</id>
+			<properties>
+				<docker.image.tag>eval</docker.image.tag>
+				<PROFILE_ID>EvalVar4</PROFILE_ID>
 			</properties>
 		</profile>
 	</profiles>
