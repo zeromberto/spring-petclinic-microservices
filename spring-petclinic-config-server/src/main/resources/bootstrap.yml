@@ -7,4 +7,3 @@ spring:
           uri: https://github.com/zeromberto/spring-petclinic-microservices-config
           # Uncomment for local configuration repository:
           # uri: file:///${GIT_REPO}
-      label: ${docker.image.tag}

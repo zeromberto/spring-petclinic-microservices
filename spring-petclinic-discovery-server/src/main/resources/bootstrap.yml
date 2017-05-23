@@ -6,7 +6,43 @@ spring:
     name: discovery-server
 ---
 spring:
-  profiles: docker
+  profiles: calibration
   cloud:
     config:
       uri: http://config-server:8888
+      label: calibration
+---
+spring:
+  profiles: eval
+  cloud:
+    config:
+      uri: http://config-server:8888
+      label: eval
+---
+spring:
+  profiles: EvalVar1
+  cloud:
+    config:
+      uri: http://config-server:8888
+      label: EvalVar1
+---
+spring:
+  profiles: EvalVar2
+  cloud:
+    config:
+      uri: http://config-server:8888
+      label: EvalVar2
+---
+spring:
+  profiles: EvalVar3
+  cloud:
+    config:
+      uri: http://config-server:8888
+      label: EvalVar3
+---
+spring:
+  profiles: EvalVar4
+  cloud:
+    config:
+      uri: http://config-server:8888
+      label: EvalVar4
