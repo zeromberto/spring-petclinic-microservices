@@ -31,17 +31,8 @@
 		<java.version>1.8</java.version>
 		<docker.plugin.version>0.4.13</docker.plugin.version>
 		<docker.image.prefix>zeromberto</docker.image.prefix>
+		<docker.image.tag>calibration</docker.image.tag>
 	</properties>
-
-	<profiles>
-		<profile>
-			<id>calibration</id>
-			<properties>
-				<docker.image.tag>calibration</docker.image.tag>
-				<PROFILE_ID>calibration</PROFILE_ID>
-			</properties>
-		</profile>
-	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
