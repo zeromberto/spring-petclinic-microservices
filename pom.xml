@@ -25,14 +25,53 @@
 		<module>spring-petclinic-kieker-monitoring</module>
     </modules>
 
-    <properties>
-        <assertj.version>3.5.2</assertj.version>
-        <spring-cloud.version>Camden.SR1</spring-cloud.version>
-        <java.version>1.8</java.version>
-        <docker.plugin.version>0.4.13</docker.plugin.version>
-        <docker.image.prefix>zeromberto</docker.image.prefix>
+	<properties>
+		<assertj.version>3.5.2</assertj.version>
+		<spring-cloud.version>Camden.SR1</spring-cloud.version>
+		<java.version>1.8</java.version>
+		<docker.plugin.version>0.4.13</docker.plugin.version>
+		<docker.image.prefix>zeromberto</docker.image.prefix>
 		<docker.image.tag>calibration</docker.image.tag>
-    </properties>
+	</properties>
+
+	<profiles>
+		<profile>
+			<id>calibration</id>
+			<properties>
+				<tag>calibration</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>eval</id>
+			<properties>
+				<tag>eval</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar1</id>
+			<properties>
+				<tag>EvalVar1</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar2</id>
+			<properties>
+				<tag>EvalVar2</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar3</id>
+			<properties>
+				<tag>EvalVar3</tag>
+			</properties>
+		</profile>
+		<profile>
+			<id>EvalVar4</id>
+			<properties>
+				<tag>EvalVar4</tag>
+			</properties>
+		</profile>
+	</profiles>
 
 	<dependencyManagement>
 		<dependencies>
