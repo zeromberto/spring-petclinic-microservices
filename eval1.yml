@@ -4,6 +4,8 @@ services:
     image: zeromberto/spring-petclinic-config-server:eval
     networks:
      - net
+    deploy:
+      mode: global
 
   discovery-server:
     image: zeromberto/spring-petclinic-discovery-server:eval
@@ -12,12 +14,12 @@ services:
     entrypoint: ["./wait-for-it.sh","config-server:8888","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
      - 8761:8761
-    volumes:
-     - /containers/discovery-server:/tmp
     networks:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar1
+    deploy:
+      mode: global
 
   customers-service:
     image: zeromberto/spring-petclinic-customers-service:eval
@@ -25,12 +27,12 @@ services:
      - config-server
      - discovery-server
     entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-    volumes:
-     - /containers/customers-service:/tmp
     networks:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar1
+    deploy:
+      mode: global
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
@@ -38,12 +40,12 @@ services:
      - config-server
      - discovery-server
     entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-    volumes:
-     - /containers/visits-service:/tmp
     networks:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar1
+    deploy:
+      mode: global
 
   vets-service:
     image: zeromberto/spring-petclinic-vets-service:eval
@@ -51,12 +53,12 @@ services:
      - config-server
      - discovery-server
     entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-    volumes:
-     - /containers/vets-service:/tmp
     networks:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar1
+    deploy:
+      mode: global
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:eval
@@ -66,12 +68,12 @@ services:
     entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
     ports:
      - 8080:8080
-    volumes:
-     - /containers/api-gateway:/tmp
     networks:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar1
+    deploy:
+      mode: global
 
 networks:
   net:
