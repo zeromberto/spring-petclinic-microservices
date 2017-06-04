@@ -37,6 +37,9 @@ services:
      - SPRING_PROFILES_ACTIVE=calibration
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '0.6'
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:calibration
@@ -52,6 +55,9 @@ services:
      - SPRING_PROFILES_ACTIVE=calibration
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '0.6'
 
   vets-service:
     image: zeromberto/spring-petclinic-vets-service:calibration
@@ -67,6 +73,9 @@ services:
      - SPRING_PROFILES_ACTIVE=calibration
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '0.6'
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:calibration
