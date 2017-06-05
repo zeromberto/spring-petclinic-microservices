@@ -1,0 +1,79 @@
+version: '3'
+services:
+  config-server:
+    image: zeromberto/spring-petclinic-config-server:eval
+    networks:
+     - net
+    deploy:
+      mode: global
+
+  discovery-server:
+    image: zeromberto/spring-petclinic-discovery-server:eval
+    depends_on:
+      - config-server
+    entrypoint: ["./wait-for-it.sh","config-server:8888","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    ports:
+     - 8761:8761
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar2
+    deploy:
+      mode: global
+
+  customers-service:
+    image: zeromberto/spring-petclinic-customers-service:eval
+    depends_on:
+     - config-server
+     - discovery-server
+    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar2
+    deploy:
+      mode: global
+
+  visits-service:
+    image: zeromberto/spring-petclinic-visits-service:eval
+    depends_on:
+     - config-server
+     - discovery-server
+    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar2
+    deploy:
+      mode: global
+
+  vets-service:
+    image: zeromberto/spring-petclinic-vets-service:eval
+    depends_on:
+     - config-server
+     - discovery-server
+    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar2
+    deploy:
+      mode: global
+
+  api-gateway:
+    image: zeromberto/spring-petclinic-api-gateway:eval
+    depends_on:
+     - config-server
+     - discovery-server
+    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    ports:
+     - 8080:8080
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar2
+    deploy:
+      mode: global
+
+networks:
+  net:
