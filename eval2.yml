@@ -33,6 +33,10 @@ services:
      - SPRING_PROFILES_ACTIVE=EvalVar2
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '1.0'
+          cpuset-cpus: 4
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
@@ -46,6 +50,10 @@ services:
      - SPRING_PROFILES_ACTIVE=EvalVar2
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '1.0'
+          cpuset-cpus: 5
 
   vets-service:
     image: zeromberto/spring-petclinic-vets-service:eval
@@ -59,6 +67,10 @@ services:
      - SPRING_PROFILES_ACTIVE=EvalVar2
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '1.0'
+          cpuset-cpus: 6
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:eval
@@ -74,6 +86,10 @@ services:
      - SPRING_PROFILES_ACTIVE=EvalVar2
     deploy:
       mode: global
+      resources:
+        limits:
+          cpus: '1.0'
+          cpuset-cpus: 7
 
 networks:
   net:
