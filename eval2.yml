@@ -35,7 +35,7 @@ services:
       mode: global
       resources:
         limits:
-          cpus: '1.0'
+          cpus: '0.0625'
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
@@ -68,6 +68,7 @@ services:
       resources:
         limits:
           cpus: '1.0'
+    cpuset-cpus: '0'
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:eval
