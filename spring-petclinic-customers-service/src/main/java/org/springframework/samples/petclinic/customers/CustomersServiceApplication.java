@@ -14,8 +14,8 @@ import kieker.monitoring.probe.spring.flow.RestInInterceptor;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@Configuration
-@ImportResource("classpath:/META-INF/aop.xml")
+//@Configuration
+//@ImportResource("classpath:/META-INF/aop.xml")
 //@Import(MonitoringConfig.class)
 public class CustomersServiceApplication extends WebMvcConfigurerAdapter {
 
@@ -26,6 +26,6 @@ public class CustomersServiceApplication extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
     	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor());
-    	registry.addInterceptor(new RestInInterceptor("_CustomerService"));
+    	registry.addInterceptor(new RestInInterceptor("CustomerService"));
     }
 }

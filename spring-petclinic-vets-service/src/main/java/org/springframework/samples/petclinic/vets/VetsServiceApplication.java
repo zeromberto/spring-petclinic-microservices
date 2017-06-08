@@ -12,8 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @EnableDiscoveryClient
 @SpringBootApplication
-@Configuration
-@ImportResource("classpath:/META-INF/aop.xml")
+//@Configuration
+//@ImportResource("classpath:/META-INF/aop.xml")
 public class VetsServiceApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
@@ -23,6 +23,6 @@ public class VetsServiceApplication extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
     	registry.addWebRequestInterceptor(new OperationExecutionWebRequestRegistrationInterceptor());
-    	registry.addInterceptor(new RestInInterceptor("_VetsService"));
+    	registry.addInterceptor(new RestInInterceptor("VetsService"));
     }
 }

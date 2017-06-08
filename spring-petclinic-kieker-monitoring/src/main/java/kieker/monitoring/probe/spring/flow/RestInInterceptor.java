@@ -152,7 +152,7 @@ public class RestInInterceptor extends WebContentInterceptor {
 		final long tout = TIME.getTime();
 
 		final ThreadSpecificInterceptedData tsid = this.threadSpecificInterceptedData.get();
-		String operationName = "HTTP" + this.kiekerQualifier + "."
+		String operationName = this.kiekerQualifier + "."
 				+ request.getRequestURI().replace("/", "").replaceAll("[0-9]+", "ID").replace("api","")
 				+ tsid.getSignature().replace("\n", "").replaceAll("( throws.*)", "");
 		CTRLINST.newMonitoringRecord(new OperationExecutionRecord(operationName, tsid.getSessionId(), tsid.getTraceId(), tsid.getTin(), tout,
