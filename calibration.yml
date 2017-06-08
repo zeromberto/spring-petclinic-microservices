@@ -38,6 +38,7 @@ services:
     deploy:
       mode: global
       resources:
+        cpus: 8
         limits:
           cpus: '1.0'
 
@@ -56,6 +57,7 @@ services:
     deploy:
       mode: global
       resources:
+        cpus: 9
         limits:
           cpus: '1.0'
 
@@ -74,6 +76,7 @@ services:
     deploy:
       mode: global
       resources:
+        cpus: 10
         limits:
           cpus: '1.0'
 
@@ -94,6 +97,7 @@ services:
     deploy:
       mode: global
       resources:
+        cpus: 11
         limits:
           cpus: '1.0'
 
