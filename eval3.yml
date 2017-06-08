@@ -17,11 +17,11 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar2
+     - SPRING_PROFILES_ACTIVE=EvalVar3
     deploy:
       mode: global
 
-  customers-service:
+  customers-service0:
     image: zeromberto/spring-petclinic-customers-service:eval
     depends_on:
      - config-server
@@ -30,12 +30,44 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar2
+     - SPRING_PROFILES_ACTIVE=EvalVar3
     deploy:
       mode: global
       resources:
         limits:
           cpus: '1.0'
+          
+  customers-service1:
+    image: zeromberto/spring-petclinic-customers-service:eval
+    depends_on:
+     - config-server
+     - discovery-server
+    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar3
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '0.66'
+          
+  customers-service2:
+    image: zeromberto/spring-petclinic-customers-service:eval
+    depends_on:
+     - config-server
+     - discovery-server
+    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+    networks:
+     - net
+    environment:
+     - SPRING_PROFILES_ACTIVE=EvalVar3
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '0.33'
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
@@ -46,7 +78,7 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar2
+     - SPRING_PROFILES_ACTIVE=EvalVar3
     deploy:
       mode: global
       resources:
@@ -62,7 +94,7 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar2
+     - SPRING_PROFILES_ACTIVE=EvalVar3
     deploy:
       mode: global
       resources:
@@ -80,7 +112,7 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar2
+     - SPRING_PROFILES_ACTIVE=EvalVar3
     deploy:
       mode: global
       resources:
