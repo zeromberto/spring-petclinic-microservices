@@ -1,11 +1,12 @@
-version: '3'
+version: '2'
 services:
   config-server:
     image: zeromberto/spring-petclinic-config-server:calibration
     networks:
      - net
-    deploy:
-      mode: global
+    cpuset: '0'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   discovery-server:
     image: zeromberto/spring-petclinic-discovery-server:calibration
@@ -20,8 +21,9 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=calibration
-    deploy:
-      mode: global
+    cpuset: '1'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   customers-service:
     image: zeromberto/spring-petclinic-customers-service:calibration
@@ -35,12 +37,9 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=calibration
-    deploy:
-      mode: global
-      resources:
-        cpus: 8
-        limits:
-          cpus: '1.0'
+    cpuset: '4'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:calibration
@@ -54,12 +53,9 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=calibration
-    deploy:
-      mode: global
-      resources:
-        cpus: 9
-        limits:
-          cpus: '1.0'
+    cpuset: '5'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   vets-service:
     image: zeromberto/spring-petclinic-vets-service:calibration
@@ -73,12 +69,9 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=calibration
-    deploy:
-      mode: global
-      resources:
-        cpus: 10
-        limits:
-          cpus: '1.0'
+    cpuset: '6'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:calibration
@@ -94,12 +87,9 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=calibration
-    deploy:
-      mode: global
-      resources:
-        cpus: 11
-        limits:
-          cpus: '1.0'
+    cpuset: '7'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
 networks:
   net:
