@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   config-server:
     image: zeromberto/spring-petclinic-config-server:eval

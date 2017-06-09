@@ -1,12 +1,13 @@
-version: '3'
+version: '2'
 services:
   config-server:
     image: zeromberto/spring-petclinic-config-server:eval
     networks:
      - net
-    deploy:
-      mode: global
-
+    cpuset: '0'
+    cpu_quota: 100000
+    cpu_shares: 100000
+    
   discovery-server:
     image: zeromberto/spring-petclinic-discovery-server:eval
     depends_on:
@@ -17,9 +18,10 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '1'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   customers-service0:
     image: zeromberto/spring-petclinic-customers-service:eval
@@ -30,14 +32,11 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
-      resources:
-        cpus: 8
-        limits:
-          cpus: '1.0'
-          
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '8'
+    cpu_quota: 100000
+    cpu_shares: 100000
+
   customers-service1:
     image: zeromberto/spring-petclinic-customers-service:eval
     depends_on:
@@ -47,14 +46,11 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
-      resources:
-        cpus: 9
-        limits:
-          cpus: '0.66'
-          
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '8'
+    cpu_quota: 100000
+    cpu_shares: 66666
+    
   customers-service2:
     image: zeromberto/spring-petclinic-customers-service:eval
     depends_on:
@@ -64,14 +60,11 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
-      resources:
-        cpus: 10
-        limits:
-          cpus: '0.33'
-
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '8'
+    cpu_quota: 100000
+    cpu_shares: 33333
+    
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
     depends_on:
@@ -81,13 +74,10 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
-      resources:
-        cpus: 11
-        limits:
-          cpus: '1.0'
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '5'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   vets-service:
     image: zeromberto/spring-petclinic-vets-service:eval
@@ -98,13 +88,10 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
-      resources:
-        cpus: 12
-        limits:
-          cpus: '1.0'
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '6'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:eval
@@ -117,13 +104,10 @@ services:
     networks:
      - net
     environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    deploy:
-      mode: global
-      resources:
-        cpus: 13
-        limits:
-          cpus: '1.0'
+     - SPRING_PROFILES_ACTIVE=EvalVar4
+    cpuset: '7'
+    cpu_quota: 100000
+    cpu_shares: 100000
 
 networks:
   net:
