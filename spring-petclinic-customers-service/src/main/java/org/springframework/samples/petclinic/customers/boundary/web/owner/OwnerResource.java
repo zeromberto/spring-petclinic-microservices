@@ -15,6 +15,8 @@
  */
 package org.springframework.samples.petclinic.customers.boundary.web.owner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.samples.petclinic.customers.application.OwnerService;
@@ -35,6 +37,7 @@ import java.util.Collection;
 @RestController
 public class OwnerResource {
 
+    private static final Logger LOG = LoggerFactory.getLogger(OwnerService.class);
     private final OwnerService ownerService;
 
     @Autowired
@@ -65,6 +68,7 @@ public class OwnerResource {
      */
     @GetMapping(value = "/{ownerId}")
     public Owner findOwner(@PathVariable("ownerId") int ownerId) {
+        LOG.info("Accessed OwnerNumberedGET");
         return retrieveOwner(ownerId);
     }
 
@@ -73,6 +77,7 @@ public class OwnerResource {
      */
     @GetMapping
     public Collection<Owner> findAll() {
+        LOG.info("Accessed OwnerGET");
         return ownerService.findAll();
     }
 

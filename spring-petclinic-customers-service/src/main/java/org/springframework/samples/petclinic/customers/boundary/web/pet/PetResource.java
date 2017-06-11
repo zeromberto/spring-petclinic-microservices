@@ -16,6 +16,8 @@
 package org.springframework.samples.petclinic.customers.boundary.web.pet;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,8 @@ import java.util.Date;
  */
 @RestController
 public class PetResource {
+
+    private static final Logger LOG = LoggerFactory.getLogger(OwnerService.class);
 
     private final PetService petService;
 
@@ -85,6 +89,7 @@ public class PetResource {
 
     @GetMapping("owners/*/pets/{petId}")
     public PetDetails findPet(@PathVariable("petId") int petId) {
+        LOG.info("Accessed PetsNumberedGET");
         return new PetDetails(petService.findPetById(petId));
     }
 
