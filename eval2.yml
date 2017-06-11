@@ -36,6 +36,8 @@ services:
     cpuset: '4'
     cpu_quota: 100000
     cpu_shares: 100000
+    ports:
+     - 8081:8081
 
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
@@ -50,6 +52,8 @@ services:
     cpuset: '5'
     cpu_quota: 100000
     cpu_shares: 100000
+    ports:
+     - 8082:8082
 
   vets-service:
     image: zeromberto/spring-petclinic-vets-service:eval
@@ -64,6 +68,8 @@ services:
     cpuset: '6'
     cpu_quota: 100000
     cpu_shares: 100000
+    ports:
+     - 8083:8083
 
   api-gateway:
     image: zeromberto/spring-petclinic-api-gateway:eval
