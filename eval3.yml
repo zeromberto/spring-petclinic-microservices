@@ -47,7 +47,7 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar3
-    cpuset: '8'
+    cpuset: '9'
     cpu_quota: 100000
     cpu_shares: 66666
     
@@ -61,7 +61,7 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar3
-    cpuset: '8'
+    cpuset: '10'
     cpu_quota: 100000
     cpu_shares: 33333
     
