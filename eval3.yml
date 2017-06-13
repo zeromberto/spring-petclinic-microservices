@@ -48,8 +48,8 @@ services:
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar3
     cpuset: '9'
-    cpu_quota: 100000
-    cpu_shares: 66666
+    cpu_quota: 66666
+    cpu_shares: 100000
     
   customers-service2:
     image: zeromberto/spring-petclinic-customers-service:eval
@@ -62,8 +62,8 @@ services:
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar3
     cpuset: '10'
-    cpu_quota: 100000
-    cpu_shares: 33333
+    cpu_quota: 33333
+    cpu_shares: 100000
     
   visits-service:
     image: zeromberto/spring-petclinic-visits-service:eval
