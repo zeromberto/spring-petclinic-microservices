@@ -47,8 +47,8 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar2
-    cpuset: '5'
-    cpu_quota: 100000
+    cpuset: '5,6,7'
+    cpu_quota: 300000
     cpu_shares: 100000
 
   vets-service:
@@ -61,8 +61,8 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar2
-    cpuset: '6'
-    cpu_quota: 100000
+    cpuset: '8,9,10'
+    cpu_quota: 300000
     cpu_shares: 100000
 
   api-gateway:
@@ -77,8 +77,8 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar2
-    cpuset: '7'
-    cpu_quota: 100000
+    cpuset: '11,12,13'
+    cpu_quota: 300000
     cpu_shares: 100000
 
 networks:
