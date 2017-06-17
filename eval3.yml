@@ -33,7 +33,7 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar3
-    cpuset: '8,9,10'
+    cpuset: '8'
     cpu_quota: 300000
     cpu_shares: 100000
 
@@ -47,22 +47,8 @@ services:
      - net
     environment:
      - SPRING_PROFILES_ACTIVE=EvalVar3
-    cpuset: '11,12'
+    cpuset: '9,10'
     cpu_quota: 200000
-    cpu_shares: 100000
-    
-  customers-service2:
-    image: zeromberto/spring-petclinic-customers-service:eval
-    depends_on:
-     - config-server
-     - discovery-server
-    entrypoint: ["./wait-for-it.sh","discovery-server:8761","--timeout=60","--","java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
-    networks:
-     - net
-    environment:
-     - SPRING_PROFILES_ACTIVE=EvalVar3
-    cpuset: '13'
-    cpu_quota: 100000
     cpu_shares: 100000
     
   visits-service:
