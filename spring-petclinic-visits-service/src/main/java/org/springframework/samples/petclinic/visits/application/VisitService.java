@@ -6,6 +6,7 @@ import org.springframework.samples.petclinic.visits.domain.model.visit.Visit;
 import org.springframework.samples.petclinic.visits.domain.model.visit.VisitRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import resourcedemand.ResourceDemandingBehaviour;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class VisitService {
 
     @Transactional(readOnly = true)
     public List<Visit> findVisitsByPetId(final int petId) {
+        new ResourceDemandingBehaviour().calculate(4);
         return visitRepository.findByPetId(petId);
     }
 

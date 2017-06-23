@@ -65,6 +65,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.samples</groupId>
+            <artifactId>spring-petclinic-resourcedemand</artifactId>
+            <version>1.4.2</version>
+        </dependency>
     </dependencies>
 
 	<build>

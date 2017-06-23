@@ -9,6 +9,7 @@ import org.springframework.samples.petclinic.customers.domain.model.pet.PetRepos
 import org.springframework.samples.petclinic.customers.domain.model.pet.PetType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import resourcedemand.ResourceDemandingBehaviour;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class PetService {
 
     @Transactional(readOnly = true)
     public Pet findPetById(int id) throws DataAccessException {
+        new ResourceDemandingBehaviour().calculate(5);
         return petRepository.findById(id);
     }
 

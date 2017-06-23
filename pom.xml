@@ -23,7 +23,8 @@
         <module>spring-petclinic-discovery-server</module>
         <module>spring-petclinic-api-gateway</module>
 		<module>spring-petclinic-kieker-monitoring</module>
-    </modules>
+		<module>spring-petclinic-resourcedemand</module>
+	</modules>
 
 	<properties>
 		<assertj.version>3.5.2</assertj.version>

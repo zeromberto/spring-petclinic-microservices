@@ -8,8 +8,10 @@ import org.springframework.samples.petclinic.customers.domain.model.owner.Owner;
 import org.springframework.samples.petclinic.customers.domain.model.owner.OwnerRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import resourcedemand.ResourceDemandingBehaviour;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Maciej Szarlinski
@@ -28,13 +30,16 @@ public class OwnerService {
 
     @Transactional(readOnly = true)
     public Owner findOwnerById(int id) throws DataAccessException {
+        new ResourceDemandingBehaviour().calculate(1);
         return ownerRepository.findOne(id);
     }
 
     //@Monitored
     @Transactional(readOnly = true)
     public Collection<Owner> findAll() throws DataAccessException {
-        return ownerRepository.findAll();
+        List<Owner> owners = ownerRepository.findAll();
+        new ResourceDemandingBehaviour().calculate(owners.size());
+        return owners;
     }
 
     //@Monitored

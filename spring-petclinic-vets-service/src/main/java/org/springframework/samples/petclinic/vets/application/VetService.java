@@ -6,6 +6,7 @@ import org.springframework.samples.petclinic.vets.domain.model.vet.Vet;
 import org.springframework.samples.petclinic.vets.domain.model.vet.VetRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import resourcedemand.ResourceDemandingBehaviour;
 
 import java.util.Collection;
 
@@ -24,6 +25,8 @@ public class VetService {
 
     @Transactional(readOnly = true)
     public Collection<Vet> findVets() throws DataAccessException {
-        return vetRepository.findAll();
+        Collection<Vet> vets = vetRepository.findAll();
+        new ResourceDemandingBehaviour().calculate(vets.size());
+        return vets;
     }
 }
