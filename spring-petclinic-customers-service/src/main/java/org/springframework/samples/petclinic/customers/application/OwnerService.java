@@ -30,7 +30,7 @@ public class OwnerService {
 
     @Transactional(readOnly = true)
     public Owner findOwnerById(int id) throws DataAccessException {
-        new ResourceDemandingBehaviour().calculate(1);
+        new ResourceDemandingBehaviour().calculate(6);
         return ownerRepository.findOne(id);
     }
 
