@@ -1,5 +1,6 @@
 package resourcedemand;
 
+import java.util.BitSet;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -7,14 +8,13 @@ import java.util.concurrent.ThreadLocalRandom;
  * Created by mrombach on 23.06.2017.
  */
 public class ResourceDemandingBehaviour {
-    public void calculate(int number) {
-        int n = number * 99999;
-        n = n + ThreadLocalRandom.current().nextInt(1, 5000 + 1);;
+    public int calculate(int number) {
+        int n = number * ThreadLocalRandom.current().nextInt(6000000, 6010000);
 
         // initially assume all integers are prime
-        boolean[] isPrime = new boolean[n+1];
+        BitSet isPrime = new BitSet(n+1);
         for (int i = 2; i <= n; i++) {
-            isPrime[i] = true;
+            isPrime.set(i);
         }
 
         // mark non-primes <= n using Sieve of Eratosthenes
@@ -22,9 +22,9 @@ public class ResourceDemandingBehaviour {
 
             // if factor is prime, then mark multiples of factor as nonprime
             // suffices to consider mutiples factor, factor+1, ...,  n/factor
-            if (isPrime[factor]) {
+            if (isPrime.get(factor)) {
                 for (int j = factor; factor*j <= n; j++) {
-                    isPrime[factor*j] = false;
+                    isPrime.clear(factor*j);
                 }
             }
         }
@@ -32,7 +32,8 @@ public class ResourceDemandingBehaviour {
         // count primes
         int primes = 0;
         for (int i = 2; i <= n; i++) {
-            if (isPrime[i]) primes++;
+            if (isPrime.get(i)) primes++;
         }
+        return primes;
     }
 }
