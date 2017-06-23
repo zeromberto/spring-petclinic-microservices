@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class ResourceDemandingBehaviour {
     public int calculate(int number) {
-        int n = number * ThreadLocalRandom.current().nextInt(6000000, 6010000);
+        int n = number * ThreadLocalRandom.current().nextInt(3000000, 3010000);
 
         // initially assume all integers are prime
         BitSet isPrime = new BitSet(n+1);
