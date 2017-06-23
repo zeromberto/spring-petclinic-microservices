@@ -81,6 +81,11 @@
             <artifactId>hsqldb</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.samples</groupId>
+            <artifactId>spring-petclinic-resourcedemand</artifactId>
+            <version>1.4.2</version>
+        </dependency>
     </dependencies>
 
     <build>
